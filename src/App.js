@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Component} from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class Counter extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      counter: 0
+    }
+  }
+  
+  handleVoteUpClick = e => {
+    e.preventDefault();
+    let counter =  this.state.counter + 1;
+    this.setState({counter});
+  }
+
+  handleVoteDownClick = e => {
+    e.preventDefault();
+    let counter =  this.state.counter > 0 ? this.state.counter - 1 : 0;
+    this.setState({counter});
+  }
+
+  render() {
+    return (
+      <div>
+        <p>{this.state.counter}</p>
+        <button onClick={this.handleVoteUpClick}>Vote Up</button>
+        <button onClick={this.handleVoteDownClick}>Vote Down</button>
+      </div>
+    );
+  }
+
+};
+
+class App extends Component {
+  render() {
+    return (
+      <Counter/>
+    );
+  }
 }
-
 export default App;
